@@ -489,7 +489,7 @@
     /* Mobile-responsive */
     @media (max-width: 70rem) {
         .main .hero-section .nav .nav-list {
-            padding-inline: 1rem;
+            padding-inline-end: 1rem;
 
             @media (max-width: 60rem) {
                 .right {
@@ -535,6 +535,7 @@
             .hero-section {
                 .nav {
                     .nav-list {
+                        padding-inline: 1rem;
                         grid-template-columns: repeat(2, 1fr);
 
                         .left,
