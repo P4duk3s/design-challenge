@@ -85,8 +85,9 @@
                 .nav-list {
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
-                    padding: 1rem 3rem;
+                    grid-template-rows: 5rem;
                     font-family: var(--nav-text-font-family);
+                    padding-inline: 3rem;
 
                     li {
                         list-style: none;
@@ -97,7 +98,7 @@
                     }
 
                     .left {
-                        justify-self: start;
+                        align-self: center;
 
                         .company-name {
                             color: var(--logo-colour);
@@ -108,8 +109,6 @@
                     }
 
                     .center {
-                        justify-self: center;
-                        align-self: start;
                         display: grid;
                         grid-template-columns: repeat(5, 1fr);
                         gap: 2rem;
@@ -139,78 +138,13 @@
                         }
                     }
 
-                    .dropdown {
-                        position: relative;
 
-                        &:has(> .link-container:hover > .dropdown-menu) .dropdown-menu {
-                            display: block;
-                        }
-
-                        .dropdown-menu {
-                            position: absolute;
-                            display: none;
-                            top: 100%;
-                            width: 100vw;
-                            background-color: white;
-                            padding-block: 3rem;
-
-                            ul {
-                                display: flex;
-
-                                li {
-                                    flex: 1;
-                                    display: flex;
-                                    flex-direction: column;
-                                    align-items: center;
-                                    gap: 0.5rem;
-                                    color: black;
-
-                                    .sub-page {
-                                        font-size: 1.5rem;
-                                        cursor: pointer;
-                                        font-weight: 500;
-
-                                        &:hover {
-                                            color: var(--a-hover-colour);
-                                        }
-                                    }
-
-                                    .img-text-container {
-                                        display: flex;
-                                        flex-direction: column;
-                                        align-items: flex-start;
-                                        gap: 0.1rem;
-                                        line-height: 1.2rem;
-
-                                        h4 {
-                                            font-size: 1rem;
-                                            color: rgb(1, 23, 44);
-                                            font-weight: 500;
-                                        }
-
-                                        p {
-                                            font-size: 1rem;
-                                            color: rgb(148, 158, 168);
-                                        }
-
-
-                                        img {
-                                            max-width: 100%;
-                                            max-height: 20rem;
-                                            height: auto;
-                                            object-fit: cover;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
 
                     .right {
+                        justify-self: end;
                         display: flex;
                         align-items: center;
                         gap: 0.5rem;
-                        justify-self: end;
 
                         .icon {
                             border-radius: 100%;
@@ -265,10 +199,6 @@
                     }
                 }
 
-                .menu-checkbox {
-                    display: none;
-                }
-
                 .hamburger-menu {
                     font-size: 3rem;
                     display: none;
@@ -278,6 +208,10 @@
                     label {
                         cursor: pointer;
                         color: inherit;
+                    }
+
+                    .menu-checkbox {
+                        display: none;
                     }
 
                     .mobile-menu {
@@ -356,12 +290,81 @@
                                     }
 
                                 }
-
-
                             }
                         }
                     }
                 }
+
+                &:has(.nav-list > .center > .expand:hover) .dropdown-menu {
+                    display: block;
+                }
+
+                .dropdown-menu:hover {
+                    display: block;
+                }
+
+                .dropdown-menu {
+                    position: absolute;
+                    display: none;
+                    width: 100vw;
+                    background-color: white;
+                    padding-block: 3rem;
+                    border: 2px solid rgb(206, 212, 218);
+
+                    ul {
+                        display: flex;
+
+                        li {
+                            flex: 1;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 1rem;
+                            color: black;
+
+                            .sub-page {
+                                font-size: 1.5rem;
+                                cursor: pointer;
+                                font-weight: 500;
+
+                                &:hover {
+                                    color: var(--a-hover-colour);
+                                }
+                            }
+
+                            .img-text-container {
+                                display: flex;
+                                flex-direction: column;
+                                align-items: flex-start;
+                                gap: 0.1rem;
+                                line-height: 1.2rem;
+
+                                h4 {
+                                    font-size: 1rem;
+                                    color: rgb(1, 23, 44);
+                                    font-weight: 500;
+                                }
+
+                                p {
+                                    font-size: 1rem;
+                                    color: rgb(148, 158, 168);
+                                }
+
+
+                                img {
+                                    max-width: 100%;
+                                    max-height: 20rem;
+                                    height: auto;
+                                    object-fit: cover;
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+
             }
 
             .content {
@@ -455,6 +458,10 @@
         }
     }
 
+    body {
+        overflow-x: hidden;
+    }
+
     /* Header and background toggle */
     .hero-section:has(.content .toggle-container .right:checked) .h3 {
 
@@ -482,15 +489,16 @@
     /* Mobile-responsive */
     @media (max-width: 70rem) {
         .main .hero-section .nav .nav-list {
-            padding: 1rem 1rem 1rem 3rem;
+            padding-inline: 1rem;
 
             @media (max-width: 60rem) {
                 .right {
-                    flex-direction: column;
-                    align-items: flex-end;
+                    .btn {
+                        width: auto;
 
-                    a {
-                        order: 1;
+                        svg {
+                            display: none;
+                        }
                     }
                 }
             }
@@ -500,12 +508,16 @@
 
                 .hamburger-menu {
                     font-size: 2.5rem;
+                    white-space: nowrap;
                 }
-            }
 
-            @media (max-width: 24rem) {
-                .hamburger-menu .menu-toggle-text {
-                    display: none;
+                .right {
+                    justify-self: flex-end;
+                    flex-direction: column;
+
+                    a {
+                        order: 1;
+                    }
                 }
             }
         }
@@ -529,16 +541,6 @@
                         .left,
                         .center {
                             display: none;
-                        }
-
-                        .right {
-                            justify-self: center;
-                            flex-direction: row;
-                            align-items: center;
-
-                            a {
-                                order: 0;
-                            }
                         }
 
                         .hamburger-menu {
